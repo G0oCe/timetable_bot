@@ -1,39 +1,40 @@
-import subprocess
-import os
-import logging
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, Updater
+import json
+from html_to_object import create_schedule
+from tmp import login, write_html_to_file, logout
 
 
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
+output_file_path = 'schedule.json'
 
+def create_files():
+    login()
 
+    for i in range(1,37):
+        for j in range(1,5):
+            try:
+                write_html_to_file(i,j)
+            except:
+                print(f'Error for faculty_id: {i}, course: {j}')
 
-# Telegram bot token
-TOKEN = '6882083004:AAFBifAGRn_RnV1lljyDpj7MWSvHlB3MZjg'
-
-# Define the command handler for the /run command
-def run_script(update, context):
-    # Run your Python script
-    subprocess.run(["python", "tmp.py"])
-
-    # After the script is executed, send the screenshot
-    if context.bot is not None:
-        context.bot.send_photo(update.message.chat_id, open('screenshot.png', 'rb'))
-    else:
-        logging.error("Bot object is None")
-
-# Set up the Telegram bot
-
-
+    logout()
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(TOKEN).build()
+    #create_files()
+
+    schedules = {}
+
+    for i in range(1,37):
+        for j in range(1,4):
+            try:
+                (name, schedule) = create_schedule(f'{i}-{j}.txt')
+                schedules[name] = schedule
+            except FileNotFoundError:
+                pass
     
-    start_handler = CommandHandler('start', run_script)
-    application.add_handler(start_handler)
+
+    json_obj = json.dumps(schedules, ensure_ascii=False, indent=4)
+
+
+    f = open(output_file_path, 'w', encoding='utf-8')
+    f.write(json_obj)
+    f.close()
     
-    application.run_polling()
