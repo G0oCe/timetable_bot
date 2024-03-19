@@ -36,8 +36,7 @@ def login():
 
 
 
-def write_html_to_file(facultiy_id, course):
-          
+def write_schedule_to_file(facultiy_id, course):
   first_dropdown = Select(driver.find_element('id', 'repProfId'))
   first_dropdown.select_by_value(f'{facultiy_id}')
 
@@ -60,7 +59,7 @@ def write_html_to_file(facultiy_id, course):
   #  ////
   element = driver.find_element('id', 'divPrint')
 
-  f = open(f"{facultiy_id}-{course}.txt", "w", encoding='utf-8')
+  f = open(f"./schedules/{facultiy_id}-{course}.txt", "w", encoding='utf-8')
   f.write(element.get_attribute('innerHTML'))
   f.close()
 

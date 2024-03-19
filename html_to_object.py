@@ -1,5 +1,3 @@
-import json
-
 faculty_name_line = 32
 
 line_starts = [50,94,138,182,226,270]

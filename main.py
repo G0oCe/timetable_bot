@@ -1,6 +1,6 @@
 import json
 from html_to_object import create_schedule
-from tmp import login, write_html_to_file, logout
+from load_html import login, write_schedule_to_file, logout
 
 
 output_file_path = 'schedule.json'
@@ -11,7 +11,7 @@ def create_files():
     for i in range(1,37):
         for j in range(1,5):
             try:
-                write_html_to_file(i,j)
+                write_schedule_to_file(i,j)
             except:
                 print(f'Error for faculty_id: {i}, course: {j}')
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     for i in range(1,37):
         for j in range(1,4):
             try:
-                (name, schedule) = create_schedule(f'{i}-{j}.txt')
+                (name, schedule) = create_schedule(f'./schedules/{i}-{j}.txt')
                 schedules[name] = schedule
             except FileNotFoundError:
                 pass
