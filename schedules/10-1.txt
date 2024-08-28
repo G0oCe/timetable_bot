@@ -99,7 +99,7 @@
                                         <td class="c_top" style="font-size:9px;">10:30 - 11:50</td>
                                         <td class="c_top" style="font-size:9px;"><b>214</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>Иностранный язык</b></td>
-                                        <td class="c_top" style="font-size:9px;"><b>ст.преп. Гулиева Лейла Ибрагимовна</b></td>
+                                        <td class="c_top" style="font-size:9px;"><b>к.ф.н. Гулиева Лейла Ибрагим гызы</b></td>
                                         <td class="c_top c_right" style="font-size:9px;"> &nbsp;</td>
                                     </tr><tr>
                                         <td class="c_top" height="25px" style="font-size:9px;">III</td>
@@ -187,7 +187,7 @@
                                         <td class="c_top" style="font-size:9px;">10:30 - 11:50</td>
                                         <td class="c_top" style="font-size:9px;"><b>214</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>Иностранный язык</b></td>
-                                        <td class="c_top" style="font-size:9px;"><b>ст.преп. Гулиева Лейла Ибрагимовна</b></td>
+                                        <td class="c_top" style="font-size:9px;"><b>к.ф.н. Гулиева Лейла Ибрагим гызы</b></td>
                                         <td class="c_top c_right" style="font-size:9px;"> &nbsp;</td>
                                     </tr><tr>
                                         <td class="c_top" height="25px" style="font-size:9px;">III</td>

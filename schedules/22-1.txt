@@ -230,7 +230,7 @@
                                         <td class="c_top" height="25px" style="font-size:9px;">II</td>
                                         <td class="c_top" style="font-size:9px;">10:30 - 11:50</td>
                                         <td class="c_top" style="font-size:9px;"><b>520</b></td>
-                                        <td class="c_top" style="font-size:9px;"><b>История методология изучения русского языка"Семантико-стилистические особенности совр.русских медийных и худож.текстов"</b></td>
+                                        <td class="c_top" style="font-size:9px;"><b>История и методология изучения русского языка</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>доц. Григорьева Ольга Николаевна</b></td>
                                         <td class="c_top c_right" style="font-size:9px;">Онлайн&nbsp;</td>
                                     </tr><tr>

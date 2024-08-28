@@ -22,7 +22,7 @@ def file_to_list(file_path):
     f.close()
     return html
 
-def create_schedule(input_file_path):
+def create_schedule(input_file_path, ):
     html = file_to_list(input_file_path)
 
     name = html[faculty_name_line-1]

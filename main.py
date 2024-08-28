@@ -1,13 +1,25 @@
 import json
 from html_to_object import create_schedule
-from load_html import login, write_schedule_to_file, logout
+from load_html import login, write_schedule_to_file, logout, loadIds
+import os, shutil
+from bot import botStart
 
 
 output_file_path = 'schedule.json'
 
 def create_files():
-    login()
+    folder = './schedules'
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
 
+    
     for i in range(1,37):
         for j in range(1,5):
             try:
@@ -15,18 +27,30 @@ def create_files():
             except:
                 print(f'Error for faculty_id: {i}, course: {j}')
 
-    logout()
+def get_key(d, value):
+    for k, v in d.items():
+        if v == value:
+            return k
+    return ""
+
 
 if __name__ == '__main__':
-    #create_files()
+    # login()
+    # loadIds()
+    # create_files()
+    # logout()
+    faculty_ids = json.load(open('faculty_ids.json', 'r', encoding='utf-8'))
 
     schedules = {}
 
     for i in range(1,37):
         for j in range(1,4):
             try:
-                (name, schedule) = create_schedule(f'./schedules/{i}-{j}.txt')
-                schedules[name] = schedule
+                (name, schedule) = create_schedule(f'./schedules/{i}-{j}.txt', )
+                faculty = get_key(faculty_ids, i)
+                if(faculty != "" and not faculty in schedules.keys()):
+                    schedules[faculty] = {}
+                schedules[faculty][name] = schedule
             except FileNotFoundError:
                 pass
     
@@ -38,3 +62,4 @@ if __name__ == '__main__':
     f.write(json_obj)
     f.close()
     
+    botStart()

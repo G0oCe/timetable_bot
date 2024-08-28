@@ -56,7 +56,7 @@
                                         <td class="c_top" style="font-size:9px;"><b>321</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>Иностранный язык</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>доц. Туринова Людмила Александровна</b></td>
-                                        <td class="c_top c_right" style="font-size:9px;"> &nbsp;</td>
+                                        <td class="c_top c_right" style="font-size:9px;">Онлайн&nbsp;</td>
                                     </tr><tr>
                                         <td class="c_top" height="25px" style="font-size:9px;">III</td>
                                         <td class="c_top" style="font-size:9px;">12:20 - 13:40</td>

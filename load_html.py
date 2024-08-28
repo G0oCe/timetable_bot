@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import time
+import json
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -12,7 +13,6 @@ username = 'msu'  # Update with your username
 password = 'msu2013'  # Update with your password
 
 def login():
-
   # Load the webpage
   driver.get(url)
   
@@ -63,9 +63,40 @@ def write_schedule_to_file(facultiy_id, course):
   f.write(element.get_attribute('innerHTML'))
   f.close()
 
+
+
+def loadIds():
+  faculty_ids = {}
+  
+  element = driver.find_element('id', 'repProfId')
+  str = element.get_attribute("innerHTML")
+  str = str[1:-1]
+
+  while('><' in str):
+      str = str.replace('><','')
+  strs = str.split('option')
+  strs = strs[2:]
+
+  def remove(arr, str):
+      new_arr = []
+      for x in arr:
+          x = x.replace(str, '')
+          new_arr.append(x)
+      return new_arr
+
+  strs = remove(strs, "value=")
+  strs = remove(strs, '"')
+  strs = remove(strs, 'title=>')
+  strs = remove(strs, '</')
+
+  for x in strs:
+      if(x[1:3]):
+          id = int(x[1:3])
+          faculty_ids[x[3:].removeprefix(" ")]=id
+
+  json.dump(faculty_ids, open("faculty_ids.json", 'w', encoding='utf-8'), indent=4, ensure_ascii=False)
+
 def logout():
    driver.quit()
-
-
 
 

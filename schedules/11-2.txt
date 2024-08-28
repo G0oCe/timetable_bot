@@ -281,14 +281,14 @@
                                         <td class="c_top" height="25px" style="font-size:9px;">III</td>
                                         <td class="c_top" style="font-size:9px;">12:20 - 13:40</td>
                                         <td class="c_top" style="font-size:9px;"><b>Спортзал</b></td>
-                                        <td class="c_top" style="font-size:9px;"><b>Элективные курсы</b></td>
+                                        <td class="c_top" style="font-size:9px;"><b>Физическая культура</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>ст. препод. Алиева Рахиля Фейруз гызы<br>ст. препод. Гусейнов Джейхун Самиль оглу</b></td>
                                         <td class="c_top c_right" style="font-size:9px;"> &nbsp;</td>
                                     </tr><tr>
                                         <td class="c_top" height="25px" style="font-size:9px;">IV</td>
                                         <td class="c_top" style="font-size:9px;">13:50 - 15:10</td>
                                         <td class="c_top" style="font-size:9px;"><b>Спортзал</b></td>
-                                        <td class="c_top" style="font-size:9px;"><b>Элективные курсы</b></td>
+                                        <td class="c_top" style="font-size:9px;"><b>Физическая культура</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>ст. препод. Алиева Рахиля Фейруз гызы<br>ст. препод. Гусейнов Джейхун Самиль оглу</b></td>
                                         <td class="c_top c_right" style="font-size:9px;"> &nbsp;</td>
                                     </tr><tr>

@@ -92,14 +92,14 @@
                                         <td width="120" class="c_top" style="font-size:9px;">09:00 - 10:20</td>
                                         <td class="c_top" style="font-size:9px;"><b>512</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>Древнерусская литература</b></td>
-                                        <td class="c_top" style="font-size:9px;"><b>д.ф.н. Коровин Владимир Леонидович</b></td>
+                                        <td class="c_top" style="font-size:9px;"><b>проф. Коровин Владимир Леонидович</b></td>
                                         <td class="c_top c_right" style="font-size:9px;">Онлайн&nbsp;</td>
                                     </tr><tr>
                                         <td class="c_top" height="25px" style="font-size:9px;">II</td>
                                         <td class="c_top" style="font-size:9px;">10:30 - 11:50</td>
                                         <td class="c_top" style="font-size:9px;"><b>512</b></td>
                                         <td class="c_top" style="font-size:9px;"><b>Древнерусская литература</b></td>
-                                        <td class="c_top" style="font-size:9px;"><b>д.ф.н. Коровин Владимир Леонидович</b></td>
+                                        <td class="c_top" style="font-size:9px;"><b>проф. Коровин Владимир Леонидович</b></td>
                                         <td class="c_top c_right" style="font-size:9px;">Онлайн&nbsp;</td>
                                     </tr><tr>
                                         <td class="c_top" height="25px" style="font-size:9px;">III</td>
