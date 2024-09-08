@@ -2,13 +2,14 @@ import telebot as tb
 import json
 from telebot import types
 import mysql.connector
+from markup import main_menu_markup, faculties_menu_markup, course_menu_markup
 
 bot = tb.TeleBot('6827462185:AAFx3zS0E2dAbJj-UKqK9bxr9heCt-_rzZw')
 
 mydb = mysql.connector.connect(
   host="localhost",
-  user="root",
-  password="Gago6177hpmp",
+  user="msubot",
+  password="msubot",
   database="timetable"
 )
 
@@ -51,31 +52,12 @@ def remove_subscription(id, faculty):
 
 
 
-def generate_subscribtion_markup():
-    data = {}
-    for faculty in list(faculty_ids.keys()):
-        data[faculty] = {'callback_data': 'dsadsa'}
-    markup = tb.util.quick_markup(data, row_width=2)
-        # for i in range(1,5):
-            # markup too long. Сделать так, чтобы сначала выбирался факультет, потом курс
-            # markup.add(types.InlineKeyboardButton(f'{faculty}, {i} курс', callback_data=f'subscribe:{faculty_ids[faculty]}-{i}'))
-            # Каждая кнопка должна показывать подписан или нет и подписывать или отписывать
-            # Сделать кнопки динамичными и в два ряда как в https://stackoverflow.com/questions/45558984/how-to-make-telegram-bot-dynamic-keyboardbutton-in-python-every-button-on-one-ro
-    return markup
+@bot.message_handler(commands=['start'])  # хз как это в другой файл запихать
+def send_welcome(message):
+    bot.send_message(chat_id=message.chat.id, 
+                     text="Добро пожаловать! Выберите действие:",
+                     reply_markup=main_menu_markup())     
 
-
-
-@bot.message_handler(commands=['start'])
-def start(message):
-    try:
-        insert_user(message.chat.id)
-        bot.send_message(message.chat.id, 'Вы успешно зарегистрировались', parse_mode='html')
-    except mysql.connector.Error as err:
-        if(err.errno == 1062):
-            bot.send_message(message.chat.id, 'Вы уже зарегистрированы', parse_mode='html')
-        else:
-            bot.send_message(message.chat.id, 'Произошла ошибка', parse_mode='html')
-        
 
 
 @bot.message_handler(commands=['help'])
@@ -94,20 +76,67 @@ def schedule(message):
     bot.send_message(message.chat.id, text='Выберите ваш факультет: ', reply_markup=markup)
     # bot.send_message(message.chat.id, json.dumps(schedule, indent=4, ensure_ascii=False), reply_markup=markup)
 
-@bot.message_handler(commands=['subscribe'])
-def subscribe(message):
-    markup = generate_subscribtion_markup()
-    bot.send_message(message.chat.id, text='Выберите ваш факультет: ', reply_markup=markup)
+# @bot.message_handler(commands=['subscribe'])
+# def subscribe(message):
+#     markup = generate_subscribtion_markup()
+#     bot.send_message(message.chat.id, text='Выберите ваш факультет: ', reply_markup=markup)
 
-@bot.callback_query_handler(func=lambda call: call.data.split(":")[0]=='subscribe')
-def callback_query(call):
-    id = call.data.split(":")[1]
-    print(call.data)
+@bot.callback_query_handler(func=lambda call: call.data.split(":")[0]=='subscribe') # хз че тут происходит в этой строке нахуй нам эта лямбда
+# def callback_query(call):
+#     id = call.data.split(":")[1]
+#     print(call.data)
 
-    bot.send_message(call.message.chat.id, text=f'Вы успешно подписались на {id}')
-    # Добавить логику подписывания и отписывания
+#     bot.send_message(call.message.chat.id, text=f'Вы успешно подписались на {id}')
+#     # Добавить логику подписывания и отписывания
 
+@bot.callback_query_handler(func=lambda call: True)
+def handle_query(call):
+    # Главное меню -> Меню факультетов
+    if call.data == "menu_faculties":
+        bot.edit_message_text(chat_id=call.message.chat.id,
+                              text="Выберите факультет:",
+                              message_id=call.message.message_id,
+                              reply_markup=faculties_menu_markup())
+    
+    # Выбор факультета -> Меню курсов
+    elif call.data.startswith("faculty_"):
+        faculty = call.data.split("_")[1]  # Получаем выбранный предмет
+        bot.edit_message_text(chat_id=call.message.chat.id,
+                              text=f"Вы выбрали {faculty}. Теперь выберите курс:",
+                              message_id=call.message.message_id,
+                              reply_markup=course_menu_markup(faculty))
+    
 
+    # Возврат к меню курсов для конкретного факультета
+    elif call.data.startswith("back_to_courses_"):
+        faculty = call.data.split("_")[2]  # Получаем факультет
+        bot.edit_message_text(chat_id=call.message.chat.id,
+                              text=f"Выберите курс для предмета {faculty}:",
+                              message_id=call.message.message_id,
+                              reply_markup=course_menu_markup(faculty))
+
+    # Возврат к меню предметов
+    elif call.data == "back_to_faculties":
+        bot.edit_message_text(chat_id=call.message.chat.id,
+                              text="Выберите предмет:",
+                              message_id=call.message.message_id,
+                              reply_markup=faculties_menu_markup())
+
+    # Возврат в главное меню
+    elif call.data == "back_to_main_menu":
+        bot.edit_message_text(chat_id=call.message.chat.id,
+                              text="Добро пожаловать! Выберите действие:",
+                              message_id=call.message.message_id,
+                              reply_markup=main_menu_markup())
+    
+    # Если выбрали "Информация" в главном меню
+    elif call.data == "menu_info":
+        bot.edit_message_text(chat_id=call.message.chat.id,
+                              text="Это информационный раздел. Вы можете вернуться в главное меню.",
+                              message_id=call.message.message_id,
+                              reply_markup=types.InlineKeyboardMarkup().add(
+                                  types.InlineKeyboardButton(text="⬅ Назад в главное меню", callback_data="back_to_main_menu")
+                              ))
 
 @bot.message_handler()
 def main(message):

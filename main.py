@@ -1,7 +1,7 @@
 import json
 from html_to_object import create_schedule
 from load_html import login, write_schedule_to_file, logout, loadIds
-import os, shutil
+import os, shutil   
 from bot import botStart
 
 
