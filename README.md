@@ -15,45 +15,24 @@ Before you can start working on this project, you'll need to set up a Python vir
 
 Here's how to set it up:
 
-1. Navigate to the project directory:
-
-
-```bash
-cd \path\to\timetable_bot
-```
-
-2. Create the virtual environment:
+1. Create the virtual environment:
 
 On Windows, run:
 
 ```bash
-python -m venv env
-.\env\Scripts\activate
-pip install -r requirements.txt
-
+python -m venv timetable_bot
+.\timetable_bot\Scripts\activate
+pip install -r timetable_bot\requirements.txt
 ```
 
 On Unix or MacOS, run:
 
 ```bash
-python -m venv env
-source env/bin/activate
-pip install -r requirements.txt
+python -m venv timetable_bot
+source timetable_bot/bin/activate
+pip install -r timetable_bot/requirements.txt
 ```
 
-3. Once the virtual environment is activated, the name of your virtual environment will appear on left side of terminal. This will let you know that the virtual environment is currently active. 
-
-In the terminal, you should see something similar to:
-
-```bash
-(env) C:\path\to\timetable_bot
-```
-
-Now you can install necessary packages in this environment which are required for your project.
-
-## Usage/Examples
-
-N/A soon
 
 
 [MIT](https://choosealicense.com/licenses/mit/)
