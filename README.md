@@ -22,18 +22,23 @@ Here's how to set it up:
 cd \path\to\timetable_bot
 ```
 
-2. Activate the virtual environment:
+2. Create the virtual environment:
 
 On Windows, run:
 
 ```bash
+python -m venv env
 .\env\Scripts\activate
+pip install -r requirements.txt
+
 ```
 
 On Unix or MacOS, run:
 
 ```bash
+python -m venv env
 source env/bin/activate
+pip install -r requirements.txt
 ```
 
 3. Once the virtual environment is activated, the name of your virtual environment will appear on left side of terminal. This will let you know that the virtual environment is currently active. 
