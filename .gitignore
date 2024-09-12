@@ -1,1 +1,7 @@
 *.txt
+.env
+.vs/
+lib/
+__pycache__/
+include/
+bin/

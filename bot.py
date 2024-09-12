@@ -2,15 +2,18 @@ import telebot as tb
 import json
 from telebot import types
 import mysql.connector
-from markup import main_menu_markup, faculties_menu_markup, course_menu_markup
+from markup import main_menu_markup, faculties_menu_markup, course_menu_markup 
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-bot = tb.TeleBot('6827462185:AAFx3zS0E2dAbJj-UKqK9bxr9heCt-_rzZw')
+bot = tb.TeleBot(os.getenv('TOKEN'))
 
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="msubot",
-  password="msubot",
-  database="timetable"
+  host = os.getenv('DB_HOST'),
+  user = os.getenv('DB_USER'),
+  password= os.getenv('DB_PASSWORD'),
+  database= os.getenv('DB_NAME')
 )
 
 faculty_ids = json.load(open('faculty_ids.json', 'r', encoding='utf-8'))
@@ -75,19 +78,6 @@ def schedule(message):
     # print(schedule)
     bot.send_message(message.chat.id, text='Выберите ваш факультет: ', reply_markup=markup)
     # bot.send_message(message.chat.id, json.dumps(schedule, indent=4, ensure_ascii=False), reply_markup=markup)
-
-# @bot.message_handler(commands=['subscribe'])
-# def subscribe(message):
-#     markup = generate_subscribtion_markup()
-#     bot.send_message(message.chat.id, text='Выберите ваш факультет: ', reply_markup=markup)
-
-@bot.callback_query_handler(func=lambda call: call.data.split(":")[0]=='subscribe') # хз че тут происходит в этой строке нахуй нам эта лямбда
-# def callback_query(call):
-#     id = call.data.split(":")[1]
-#     print(call.data)
-
-#     bot.send_message(call.message.chat.id, text=f'Вы успешно подписались на {id}')
-#     # Добавить логику подписывания и отписывания
 
 @bot.callback_query_handler(func=lambda call: True)
 def handle_query(call):
