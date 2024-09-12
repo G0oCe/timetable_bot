@@ -2,6 +2,7 @@ schedules/
 .env
 .vs/
 lib/
+lib64/
 __pycache__/
 include/
 bin/
