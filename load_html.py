@@ -2,6 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import time
 import json
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -9,8 +12,8 @@ driver = webdriver.Chrome(options=options)
 
 # Example usage
 url = 'http://timetable.msu.az/'  # Update with the login page URL
-username = 'msu'  # Update with your username
-password = 'msu2013'  # Update with your password
+username = os.getenv('TT_USER')  # Update with your username
+password = os.getenv('TT_PASSWORD')  # Update with your password
 
 def login():
   # Load the webpage
@@ -100,3 +103,5 @@ def logout():
    driver.quit()
 
 
+## mysql 
+## primary keys and how connect tables (foreign key)
