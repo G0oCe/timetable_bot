@@ -21,6 +21,7 @@ faculty_ids = json.load(open('faculty_ids.json', 'r', encoding='utf-8'))
 mycursor = mydb.cursor()
 
 def insert_user(id):
+    mycursor.execute(f"INSERT INTO user_table (user_id) VALUES({id});")    
     mydb.commit()
 
 def delete_user(id):
