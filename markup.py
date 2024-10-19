@@ -1,17 +1,15 @@
 import telebot
 from telebot import types
 
-
-
-
-def main_menu_markup():
+def main_menu_markup() -> types.InlineKeyboardMarkup:
+    """Creates the main menu markup."""
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton(text="Регистрация", callback_data="menu_faculties"))
     markup.add(types.InlineKeyboardButton(text="Информация", callback_data="menu_info"))
     return markup
 
-
-def faculties_menu_markup():
+def faculties_menu_markup() -> types.InlineKeyboardMarkup:
+    """Creates the faculties menu markup."""
     markup = types.InlineKeyboardMarkup()
     faculties = ["Физика", "Химия", "Математика", "Филология", "Юриспруденция"]
     for faculty in faculties:
@@ -20,17 +18,11 @@ def faculties_menu_markup():
     markup.add(types.InlineKeyboardButton(text="⬅ Назад в главное меню", callback_data="back_to_main_menu"))
     return markup
 
-
-def course_menu_markup(faculty):
+def course_menu_markup(faculty: str) -> types.InlineKeyboardMarkup:
+    """Creates the course menu markup for a specific faculty."""
     markup = types.InlineKeyboardMarkup()
     for course in range(1, 5):
         markup.add(types.InlineKeyboardButton(text=f"{course} курс", callback_data=f"course_{course}_{faculty}"))
 
     markup.add(types.InlineKeyboardButton(text="⬅ Назад к факультетам", callback_data="back_to_faculties"))
     return markup
-
-
-
-
-
-
