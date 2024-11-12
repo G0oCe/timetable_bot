@@ -4,9 +4,10 @@ import telebot as tb
 from telebot import types
 from db import insert_user, delete_user, get_user
 from markup import main_menu_markup, faculties_menu_markup, course_menu_markup
+from config.config import get_bot_connection
 
 # Initialize the bot using the token from environment variables
-bot = tb.TeleBot(os.getenv('TOKEN'))
+bot = get_bot_connection()
 
 # Handler for the /start command
 @bot.message_handler(commands=['start'])

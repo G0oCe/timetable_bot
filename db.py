@@ -1,5 +1,5 @@
 import json
-from config import get_db_connection
+from config.config import get_db_connection
 
 # Load faculty IDs from JSON
 faculty_ids = json.load(open('faculty_ids.json', 'r', encoding='utf-8'))

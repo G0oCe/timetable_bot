@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 import mysql.connector
+import telebot as tb
 
 load_dotenv()
 
@@ -12,6 +13,8 @@ def get_db_connection() -> mysql.connector.connect:
         password=os.getenv('DB_PASSWORD'),
         database=os.getenv('DB_NAME')
     )
-
-# Example of how to get the bot token if needed
-TOKEN = os.getenv('TOKEN')
+def get_bot_connection() -> tb.TeleBot:
+    token = os.getenv('TOKEN')
+    if not token:
+        raise ValueError("Bot token is not set in environment variables.")
+    return tb.TeleBot(token)
