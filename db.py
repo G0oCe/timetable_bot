@@ -2,7 +2,7 @@ import json
 from config.config import get_db_connection
 
 # Load faculty IDs from JSON
-faculty_ids = json.load(open('faculty_ids.json', 'r', encoding='utf-8'))
+faculty_ids = json.load(open('./data/faculty_ids.json', 'r', encoding='utf-8'))
 
 def execute_query(query: str, params: tuple = ()) -> None:
     """Execute a database query."""

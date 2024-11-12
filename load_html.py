@@ -6,10 +6,9 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from dotenv import load_dotenv
+from config.config import url, username, password
 
-# Load environment variables from .env file
-load_dotenv()
+
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -18,10 +17,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 options = webdriver.ChromeOptions()
 #options.add_argument('--headless')  # Run in headless mode (no GUI)
 
-# Define the login URL and user credentials
-url = 'http://timetable.msu.az/'  # Update with the actual URL
-username = os.getenv('TT_USER')  # Fetch username from environment variables
-password = os.getenv('TT_PASSWORD')  # Fetch password from environment variables
+
 
 # Initialize WebDriver globally
 driver = None
@@ -75,7 +71,7 @@ def write_schedule_to_file(faculty_id, course, week = "21.10.2024 - 26.10.2024")
         schedule_element = driver.find_element(By.ID, 'divPrint')
 
         # Write schedule to a file
-        with open(f"./schedules/{faculty_id_str}-{course_str}.txt", "w", encoding='utf-8') as f:
+        with open(f"./data/schedules/{faculty_id_str}-{course_str}.txt", "w", encoding='utf-8') as f:
             f.write(schedule_element.get_attribute('innerHTML'))
             logging.info(f"Schedule for {faculty_id_str} - Course {course_str} written to file.")
     except Exception as e:
@@ -93,7 +89,7 @@ def load_faculty_ids():
             faculty_name = option.text.strip()
             faculty_ids[faculty_name] = faculty_id
 
-        with open("faculty_ids.json", 'w', encoding='utf-8') as json_file:
+        with open("./data/faculty_ids.json", 'w', encoding='utf-8') as json_file:
             json.dump(faculty_ids, json_file, indent=4, ensure_ascii=False)
             logging.info("Faculty IDs loaded and saved to faculty_ids.json.")
     except Exception as e:
@@ -105,21 +101,4 @@ def logout():
         driver.quit()
         logging.info("WebDriver session closed.")
 
-if __name__ == "__main__":
-    setup_driver()
-    try:
-        login()  # Attempt to log in
-        
-        # Assuming you have valid faculty_id and course
-        faculty_id = "3"  # Replace with actual faculty ID
-        course = 0  # Replace with actual course index (0 for the first course)
-
-        # Attempt to write the schedule to a file
-        write_schedule_to_file(faculty_id, course)
-    
-    except Exception as e:
-        logging.error(f"An error occurred during the process: {e}")
-    
-    finally:
-        logout()  # Ensure logout happens regardless of success or failure
 

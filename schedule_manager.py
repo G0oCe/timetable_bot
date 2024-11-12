@@ -6,9 +6,9 @@ from html_to_object import create_schedule
 
 
 # Constants
-OUTPUT_FILE_PATH = 'schedule.json'
-SCHEDULES_DIR = './schedules'
-FACULTY_IDS_FILE = 'faculty_ids.json'
+OUTPUT_FILE_PATH = './data/schedule.json'
+SCHEDULES_DIR = './data/schedules'
+FACULTY_IDS_FILE = './data/faculty_ids.json'
 
 
 def create_files():
@@ -42,7 +42,7 @@ def create_schedules(faculty_ids):
     for i in range(1, 37):
         for j in range(1, 4):
             try:
-                (name, schedule) = create_schedule(f'./schedules/{i}-{j}.txt')  # Get the schedule
+                (name, schedule) = create_schedule(f'./data/schedules/{i}-{j}.txt')  # Get the schedule
                 faculty = get_key(faculty_ids, i)  # Get the faculty key
                 if faculty and faculty not in schedules:  # Check if faculty is valid and not already in schedules
                     schedules[faculty] = {}

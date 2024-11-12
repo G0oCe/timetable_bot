@@ -18,3 +18,7 @@ def get_bot_connection() -> tb.TeleBot:
     if not token:
         raise ValueError("Bot token is not set in environment variables.")
     return tb.TeleBot(token)
+
+url = os.getenv('TT_URL')  # Update with the actual URL
+username = os.getenv('TT_USER')  # Fetch username from environment variables
+password = os.getenv('TT_PASSWORD')  # Fetch password from environment variables
